@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артем Журавлев](https://up.htmlacademy.ru/react/6/user/1410513).
-* Наставник: [Андрей Карякин](https://htmlacademy.ru/profile/id133011).
+* Наставник: [Марк Коваленко](https://htmlacademy.ru/profile/id1434381).
 
 ---
 
