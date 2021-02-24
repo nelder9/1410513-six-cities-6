@@ -1,23 +1,35 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {offersValidation} from '../../const-valid';
 
-const CardScreen = (props) => {
-  const {place} = props;
-  const {title, price, photo} = place;
+const Card = (props) => {
+
+  const {offers} = props;
+
+  const {id, previewImage, title} = offers;
+
+  const history = useHistory();
+
+  const onCardClickHandler = (evt) => {
+    evt.preventDefault();
+    history.push(`/offer/${id}`);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onClick={onCardClickHandler}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={photo} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
+            <b className="place-card__price-value">&euro;{offers.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -42,13 +54,9 @@ const CardScreen = (props) => {
   );
 };
 
-CardScreen.propTypes = {
-  place: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    photo: PropTypes.string.isRequired,
-  }).isRequired
+Card.propTypes = {
+  offers: PropTypes.shape(offersValidation)
 };
 
 
-export default CardScreen;
+export default Card;
