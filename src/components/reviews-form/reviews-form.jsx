@@ -9,6 +9,8 @@ const ReviewsForm = () => {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
+    console.log(rating);
+    console.log(review);
     setRating(`0`);
     setReview(``);
   };
