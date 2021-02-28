@@ -4,26 +4,30 @@ import MainScreen from '../main-page/main';
 import LoginScreen from '../login/login';
 import FavoritesScreen from '../favorites/favorites';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import OfferScreen from '../offer/offer';
+import RoomPage from '../room/room';
+import {offersValidation} from '../../const-valid';
 
 const App = (props) => {
-  const {places, totalPlaces} = props;
+
+  const {offers} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
           <MainScreen
-            places={places}
-            totalPlaces={totalPlaces}
+            offers={offers}
           />
         </Route>
         <Route path="/login" exact>
           <LoginScreen />
         </Route>
         <Route path="/favorites" exact>
-          <FavoritesScreen />
+          <FavoritesScreen
+            offers={offers}
+          />
         </Route>
-        <Route path="/offer/:id?" exact component={OfferScreen} />
+        <Route exact path="/offer/:id?"
+          render={({match}) => <RoomPage offer={offers.find((item) => item.id.toString() === match.params.id)} />} />
         <Route>
           <h1>Page not found</h1>
         </Route>
@@ -33,14 +37,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  totalPlaces: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        photo: PropTypes.string.isRequired,
-      })
-  ).isRequired
+  offers: PropTypes.arrayOf(offersValidation)
 };
 
 export default App;
