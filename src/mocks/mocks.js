@@ -113,8 +113,8 @@ export default [{
   title: `Citadines Saint-Germain-des-Prés Paris`,
   description: `Along the beautiful Prinsengracht canal in the heart of Amsterdam, you will find Dikker en Thijs Fenice Hotel. Experience a luxurious ambiance and walk to almost all famous sights. The hotel is set in a 18th century warehouse.`,
   location: {
-    latitude: 48.85661345345,
-    longitude: 2.3514993453,
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198,
     zoom: 16
   },
   isFavorite: false,
@@ -163,8 +163,8 @@ export default [{
   title: `Mercure Hotel Brussels Centre Midi`,
   description: `The elegantly designed Mercure Hotel Brussels Center Midi is conveniently located in the heart of city, a 5-minute walk from the Brussels-South Train Station with Eurostar and Thalys terminals. A metro stop with direct connections to the city center is 300 m away. This hotel offers free access to wellness facilities, a garden with a terrace and free wireless internet.`,
   location: {
-    latitude: 50.84655345347,
-    longitude: 4.35169734311,
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
     zoom: 16
   },
   isFavorite: true,
