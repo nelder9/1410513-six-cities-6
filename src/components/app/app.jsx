@@ -8,15 +8,12 @@ import RoomPage from '../room/room';
 import {offersValidation} from '../../const-valid';
 
 const App = (props) => {
-
   const {offers} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainScreen
-            offers={offers}
-          />
+          <MainScreen />
         </Route>
         <Route path="/login" exact>
           <LoginScreen />
