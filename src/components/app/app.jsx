@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MainScreen from '../main-page/main';
+import MainPage from '../main-page/main-page';
 import LoginScreen from '../login/login';
 import FavoritesScreen from '../favorites/favorites';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import RoomPage from '../room/room';
+import RoomPage from '../room/room-page';
 import {offersValidation} from '../../const-valid';
 
 const App = (props) => {
@@ -13,7 +13,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainScreen />
+          <MainPage />
         </Route>
         <Route path="/login" exact>
           <LoginScreen />

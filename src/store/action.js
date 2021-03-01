@@ -1,6 +1,5 @@
 export const ActionType = {
-  CHANGE_LOCATION: `city/changeLocation`,
-  CHANGE_SORT: `places/changeSort`
+  CHANGE_LOCATION: `city/changeLocation`
 };
 
 export const setLocation = (location) => ({type: ActionType.CHANGE_LOCATION, payload: location});

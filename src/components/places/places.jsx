@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CitiesList from '../cities-list/cities-list';
 import PropTypes from 'prop-types';
+import NoPlaces from '../no-places/no-places';
 import LocationList from '../location-list/location-list';
-// import {getCityFiltredPlaces, getSortedPlaces} from '../../utils';
+import {getCityFiltredPlaces} from '../../utils';
 import {connect} from 'react-redux';
 import {ActionCreators} from '../../store/action';
+import {offersValidation} from '../../const-valid';
 
 const Places = (props) => {
-  console.log(props, 1);
-  const {cards, handleCityChange, currentCity, sortType} = props;
-  const [cardId, setCardId] = useState(null);
+  const {offers, handleCityChange, currentCity} = props;
 
-  // const filteredPlacesByCities = getCityFiltredPlaces(cards);
+  const filteredPlacesByCities = getCityFiltredPlaces(offers);
 
-  //const currentCityPlaces = getSortedPlaces(filteredPlacesByCities[currentCity], sortType);
+  const currentCityPlaces = filteredPlacesByCities[currentCity];
 
   return (
     <main className="page__main page__main--index page__main--index-empty">
@@ -21,17 +21,16 @@ const Places = (props) => {
       <div className="tabs">
         <section className="locations container">
           <LocationList onCityClick={handleCityChange}/>
-          <CitiesList onCursorHandle={setCardId} cardId={cardId} />
         </section>
       </div>
+      {currentCityPlaces.length === 0 ? <NoPlaces /> : <CitiesList currentCityPlaces={currentCityPlaces} />}
     </main>
   );
 };
 
-const mapStateToProps = ({cards, location, sort}) => ({
-  cards,
-  currentCity: location,
-  sortType: sort
+const mapStateToProps = ({offers, location}) => ({
+  offers,
+  currentCity: location
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,6 +39,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreators.setLocation(location));
   }
 });
+
+Places.propTypes = {
+  offers: PropTypes.arrayOf(offersValidation),
+  handleCityChange: PropTypes.func.isRequired,
+  currentCity: PropTypes.string.isRequired,
+};
 
 export {Places};
 export default connect(mapStateToProps, mapDispatchToProps)(Places);

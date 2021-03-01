@@ -1,12 +1,14 @@
 import React from 'react';
 import Places from '../places/places';
+import Header from '../header/header';
 
-const MainScreen = () => {
+const MainPage = () => {
   return (
     <div className="page page--gray page--main">
+      <Header />
       <Places />
     </div>
   );
 };
 
-export default MainScreen;
+export default MainPage;

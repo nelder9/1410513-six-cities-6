@@ -4,16 +4,28 @@ const ReviewsForm = () => {
   const [rating, setRating] = useState(`0`);
   const [review, setReview] = useState(``);
 
-  const onRatingChange = (evt) => setRating(evt.target.value);
-  const onReviewChange = (evt) => setReview(evt.target.value);
+  const onRatingChange = (evt) => {
+    const value = parseFloat(evt.target.value);
+    setRating({
+      ...rating,
+      rating: value,
+    });
+  };
+
+  const onReviewChange = (evt) => {
+    const value = evt.target.value;
+    setReview({
+      ...review,
+      review: value,
+    });
+  };
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    console.log(rating);
-    console.log(review);
     setRating(`0`);
     setReview(``);
   };
+
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={onFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
