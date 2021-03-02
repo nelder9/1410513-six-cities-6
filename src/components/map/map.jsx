@@ -2,15 +2,19 @@ import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
 import {offersValidation} from '../../const-valid';
 import PropTypes from 'prop-types';
-
+import {connect} from 'react-redux';
+import {CitiesInfo} from '../../const.js';
 import "leaflet/dist/leaflet.css";
+import {getCityFiltredPlaces} from '../../utils.js';
 
-const Map = ({offers}) => {
-
+const Map = (props) => {
+  const {city, offers} = props;
   const mapRef = useRef();
+
+  const currentOffers = getCityFiltredPlaces(offers)[city];
   useEffect(() => {
-    const cityCoords = [52.38333, 4.9];
-    const cityZoom = 12;
+    const cityCoords = CitiesInfo[city].coords;
+    const cityZoom = CitiesInfo[city].zoom;
 
     mapRef.current = leaflet.map(`map`, {
       center: cityCoords,
@@ -27,7 +31,7 @@ const Map = ({offers}) => {
       })
       .addTo(mapRef.current);
 
-    offers.forEach((point) => {
+    currentOffers.forEach((point) => {
       const customIcon = leaflet.icon({
         iconUrl: `./img/pin.svg`,
         iconSize: [27, 39]
@@ -47,13 +51,21 @@ const Map = ({offers}) => {
         mapRef.current.remove();
       };
     });
-  }, []);
+  }, [city]);
 
   return (<section className="property__map map" id="map" ref={mapRef}></section>);
 };
 
+const mapStateToProps = ({location, offers}) => ({
+  city: location,
+  offers
+});
+
 Map.propTypes = {
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offersValidation)
 };
 
-export default Map;
+export {Map};
+
+export default connect(mapStateToProps)(Map);

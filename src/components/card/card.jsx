@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import cardPropTypes from './card.prop';
 
 const Card = ({offer}) => {
-  const {id, previewImage, isPremium, price, title, type, rating, isFavorite} = offer;
+  const {id, preview_image: previewImage, is_premium: isPremium, price, title, type, rating, is_favorite: isFavorite} = offer;
   const ratingInPercents = rating * 10 * 2 + `%`;
 
   return (
