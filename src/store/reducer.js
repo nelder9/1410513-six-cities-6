@@ -1,5 +1,4 @@
 import {CityList} from "../const";
-// import {Offers} from "../mocks/mocks";
 import {ActionType} from "./action";
 import {AuthorizationStatus} from '../const';
 

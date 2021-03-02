@@ -4,8 +4,6 @@ export const ActionType = {
   LOAD_HOTELS: `data/loadHotels`,
 };
 
-export const setLocation = (location) => ({type: ActionType.CHANGE_LOCATION, payload: location});
-
 export const ActionCreators = {
   setLocation: (location) => ({
     type: ActionType.CHANGE_LOCATION,
