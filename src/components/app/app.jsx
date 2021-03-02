@@ -6,6 +6,7 @@ import FavoritesScreen from '../favorites/favorites';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import RoomPage from '../room/room-page';
 import {offersValidation} from '../../const-valid';
+import {connect} from 'react-redux';
 
 const App = (props) => {
   const {offers} = props;
@@ -33,8 +34,14 @@ const App = (props) => {
   );
 };
 
+const mapStateToProps = ({offers}) => ({
+  offers
+});
+
 App.propTypes = {
   offers: PropTypes.arrayOf(offersValidation)
 };
 
-export default App;
+export {App};
+
+export default connect(mapStateToProps)(App);

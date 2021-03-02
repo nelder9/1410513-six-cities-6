@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import thunk from "redux-thunk";
-import {Offers} from './mocks/mocks';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {reducer} from './store/reducer';
@@ -25,9 +24,7 @@ store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        offers = {Offers}
-      />
+      <App />
     </Provider>,
     document.querySelector(`#root`)
 );

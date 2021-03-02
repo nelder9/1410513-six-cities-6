@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import LoadingScreen from '../loading-screen/loading-screen';
 import CitiesList from '../cities-list/cities-list';
 import PropTypes from 'prop-types';
 import NoPlaces from '../no-places/no-places';
@@ -10,6 +11,7 @@ import {offersValidation} from '../../const-valid';
 import {fetchHotelsList} from "../../services/api-actions";
 
 const Places = (props) => {
+
   const {offers, handleCityChange, currentCity, onLoadData, isDataLoaded} = props;
 
   useEffect(() => {
@@ -18,6 +20,11 @@ const Places = (props) => {
     }
   }, [isDataLoaded]);
 
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const filteredPlacesByCities = getCityFiltredPlaces(offers);
 

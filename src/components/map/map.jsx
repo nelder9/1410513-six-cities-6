@@ -12,7 +12,9 @@ const Map = (props) => {
   const mapRef = useRef();
 
   const currentOffers = getCityFiltredPlaces(offers)[city];
+
   useEffect(() => {
+
     const cityCoords = CitiesInfo[city].coords;
     const cityZoom = CitiesInfo[city].zoom;
 
@@ -46,11 +48,11 @@ const Map = (props) => {
       })
       .addTo(mapRef.current)
       .bindPopup(point.title);
-
-      return () => {
-        mapRef.current.remove();
-      };
     });
+
+    return () => {
+      mapRef.current.remove();
+    };
   }, [city]);
 
   return (<section className="property__map map" id="map" ref={mapRef}></section>);
