@@ -7,7 +7,8 @@ const initialState = {
   cities: CityList,
   offers: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false
+  isDataLoaded: false,
+  sort: `Popular`
 };
 
 
@@ -28,6 +29,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.CHANGE_SORT:
+      return {
+        ...state,
+        sort: action.payload
       };
     default:
       return state;

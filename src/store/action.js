@@ -2,6 +2,7 @@ export const ActionType = {
   CHANGE_LOCATION: `city/changeLocation`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_HOTELS: `data/loadHotels`,
+  CHANGE_SORT: `places/changeSort`
 };
 
 export const ActionCreators = {
@@ -16,5 +17,8 @@ export const ActionCreators = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
-  })
+  }),
+  setSort(sort) {
+    return {type: ActionType.CHANGE_SORT, payload: sort};
+  }
 };

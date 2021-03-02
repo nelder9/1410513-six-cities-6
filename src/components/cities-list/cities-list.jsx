@@ -4,9 +4,10 @@ import {offersValidation} from '../../const-valid';
 import Card from '../card/card';
 import PropTypes from 'prop-types';
 import Map from '../map/map';
+import Sort from '../sort/sort';
 
 const CitiesList = (props) => {
-  const {currentCityPlaces, currentCity} = props;
+  const {currentCityPlaces, currentCity, onCursorHandle, offerId} = props;
 
   return (
     <div className="cities">
@@ -14,12 +15,13 @@ const CitiesList = (props) => {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{currentCityPlaces.length} {currentCityPlaces.length > 1 ? `places` : `place`} to stay in {currentCity}</b>
+          <Sort />
           <div className="cities__places-list places__list tabs__content">
-            {currentCityPlaces.map((offer) => <Card offer={offer} key={offer[`id`]} />) }
+            {currentCityPlaces.map((offer) => <Card offer={offer} onCursorHandle={onCursorHandle} key={offer[`id`]} />) }
           </div>
         </section>
         <div className="cities__right-section">
-          <Map offers={currentCityPlaces}/>
+          <Map offers={currentCityPlaces} offerId={offerId}/>
         </div>
       </div>
     </div>
@@ -28,8 +30,9 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   currentCityPlaces: PropTypes.arrayOf(offersValidation),
-  cardId: PropTypes.number,
-  currentCity: PropTypes.string.isRequired
+  offerId: PropTypes.number,
+  currentCity: PropTypes.string.isRequired,
+  onCursorHandle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({location}) => ({

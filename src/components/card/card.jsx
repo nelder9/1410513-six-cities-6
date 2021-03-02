@@ -1,13 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import cardPropTypes from './card.prop';
+import PropTypes from 'prop-types';
 
-const Card = ({offer}) => {
+const Card = ({offer, onCursorHandle}) => {
   const {id, preview_image: previewImage, is_premium: isPremium, price, title, type, rating, is_favorite: isFavorite} = offer;
   const ratingInPercents = rating * 10 * 2 + `%`;
 
+  const handleCursorHover = () => {
+    onCursorHandle(id);
+  };
+  const handleCursorOut = () => {
+    onCursorHandle(null);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={handleCursorHover} onMouseLeave={handleCursorOut}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -47,7 +55,8 @@ const Card = ({offer}) => {
 };
 
 Card.propTypes = {
-  offer: cardPropTypes
+  offer: cardPropTypes,
+  onCursorHandle: PropTypes.func.isRequired
 };
 
 

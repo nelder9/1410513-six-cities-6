@@ -8,9 +8,8 @@ import "leaflet/dist/leaflet.css";
 import {getCityFiltredPlaces} from '../../utils.js';
 
 const Map = (props) => {
-  const {city, offers} = props;
+  const {city, offers, offerId} = props;
   const mapRef = useRef();
-
   const currentOffers = getCityFiltredPlaces(offers)[city];
 
   useEffect(() => {
@@ -33,27 +32,27 @@ const Map = (props) => {
       })
       .addTo(mapRef.current);
 
-    currentOffers.forEach((point) => {
+    currentOffers.forEach(({id, location, title}) => {
       const customIcon = leaflet.icon({
-        iconUrl: `./img/pin.svg`,
+        iconUrl: `${id === offerId ? `./img/pin-active.svg` : `./img/pin.svg`}`,
         iconSize: [27, 39]
       });
 
       leaflet.marker({
-        lat: point.location.latitude,
-        lng: point.location.longitude
+        lat: location.latitude,
+        lng: location.longitude
       },
       {
         icon: customIcon
       })
       .addTo(mapRef.current)
-      .bindPopup(point.title);
+      .bindPopup(title);
     });
 
     return () => {
       mapRef.current.remove();
     };
-  }, [city]);
+  }, [city, offerId]);
 
   return (<section className="property__map map" id="map" ref={mapRef}></section>);
 };
@@ -65,7 +64,8 @@ const mapStateToProps = ({location, offers}) => ({
 
 Map.propTypes = {
   city: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(offersValidation)
+  offers: PropTypes.arrayOf(offersValidation),
+  offerId: PropTypes.number
 };
 
 export {Map};
